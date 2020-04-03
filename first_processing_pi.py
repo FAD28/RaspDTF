@@ -48,7 +48,7 @@ while y <= max_days:
     print("_______________________")
     time.sleep(4)
     x = 1
-    ini = '03-04-2020'
+    ini = datum
     #ini = input("Which Date? dd-mm-yyyy ")
     #ml = input("How many files?  ")
     max_loop = 100

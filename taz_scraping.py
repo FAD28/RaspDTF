@@ -9,12 +9,6 @@ from tqdm import tqdm
 import itertools
 import os
 
-now = datetime.datetime.now()
-date = now.strftime("%d-%m-%Y")
-zeit = now.strftime("%H:%M")
-print("Current date is:", date)
-print("")
-
 link = "https://www.taz.de/"
 
 class TazScraping:
@@ -60,7 +54,7 @@ class TazScraping:
 				links_list.remove(item)
 
 		print("Useful Links =  ",len(links_list))
-		os.chdir("/home/peter/Arbeitsfläche/TAZ-SCRAPING/links")    # PATH TO DIRECT
+		os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/links")    # PATH TO DIRECT
 		VERSION_Links = f'{date}_links.txt'
 		with open(VERSION_Links, 'w') as file:
 			for element in links_list:
@@ -146,7 +140,7 @@ class TazScraping:
 			VERSION= f'{date}-{name_article}.csv'
 
 			def create_output(filename,liste1, liste2, liste3, liste4, liste5, liste6, liste7):
-				os.chdir("/home/peter/Arbeitsfläche/TAZ-SCRAPING/output")				# PATH TO DIRECT
+				os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/output")				# PATH TO DIRECT
 
 				data = {}
 				data['headline'] = liste1
@@ -165,21 +159,21 @@ class TazScraping:
 				create_output(VERSION, headline, article_list, metatag_liste, intro_liste, headline_4_liste, kommentare_liste, autor_kommentar_liste)
 				print("_______________________________________________________________________________")
 				print("OUTPUT CREATED + + + + +  SUCCESS + + + Filename=", VERSION)
-				print("TIME IS:", zeit)
+				print("START TIME IS:", zeit)
 				print("_______________________________________________________________________________")
 				time.sleep(3)
 				c_success += 1
 			except:
 				print("_______________________________________________________________________________")
 				print("OUTPUT FAILED - - - - -  FAILED - - - Filename=", VERSION)
-				print("TIME IS:", zeit)
+				print("START TIME IS:", zeit)
 				print("_______________________________________________________________________________")
 				c_failed += 1
 		print("")
 		print(f"FINAL RESULTS: ---> {c_success} SUCCESS")
 		print(f" ---> {c_failed} FAILED")
 		print("_______________________________________________________________________________")
-		print("TIME IS:", zeit)
+		print("START TIME IS:", zeit)
 
 	def selenium_open(self):
 		x = 0
@@ -229,13 +223,20 @@ run.get_links(link)
 links_list =run.clean_links()
 print("_______________________________________________________________________________")
 x = 1
-while x < 10:
+while x <= 14:
+	print("START: *_*  DAY: ", x, "/14")
+	now = datetime.datetime.now()
+	date = now.strftime("%d-%m-%Y")
+	zeit = now.strftime("%H:%M")
+	print("Current date is:", date)
+	print("")
 	time.sleep(2)
 	run.get_data()
 	#run.selenium_open()
 	# time.sleep(2)
 	#run.selenium_find_comments()
 	print("COUNTER: ",x)
+	zeit = now.strftime("%H:%M")
 	print(f"DATE IS: {date} - - - TIME IS: {zeit}")
 	print("Going to Sleep ** --> zZZ")
 	time.sleep(86400)
