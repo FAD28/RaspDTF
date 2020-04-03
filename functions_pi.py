@@ -63,49 +63,54 @@ class Functions:
 		return nn
 
 run = Functions()
-ini = input("Which Date? dd-mm-yyyy ")
-ml = input("How many Artikels? ")
-max_loop = int(ml) 
-c = 1
-v_list = []
-for i in range(max_loop):
-	os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
-	number = str(c)
-	version = f'{ini}-{number}-welt_data.csv'
-	print("VERSIONS NUMMER:  ",version)
-	print("___________________________________")
-	df = pd.read_csv(version)
-	article = df['article']
-	time = list(df['time'])
-	summary = list(df['summary'])
-	hd = df['headline']
-	headline = [i for i in hd]
+master = 1
 
-	# New Article Name:
-	name = headline[0]
-	try:
-		name2 = name.split()
-		nn = run.clean_name(name2)
-		new_version_number = number + "-" + nn + '-' + ini + ".csv"
-	except:
-		new_version_number = number + "-" + 'NAN' + '-01-04-2020' + ".csv"
-        
-        v_list.append(new_version_number)
-        
-	try:  # TRY: Weil bei Artikeln ohne Inhalt sonst ein Fehler kommt
-		data = [i.split(".") for i in article][0]
-	except:
-		print(" - - - VERSION: {version}   hat einen Fehler. Möglicherweiße kein Inhalt?!")
+#ini = input("Which Date? dd-mm-yyyy ")
+#ml = input("How many Artikels? ")
+
+y = 1
+max_days = 14
+while y <= max_days:
+    print("DAY NUMBER: ", y, "/", max_days)
+    max_loop = int(100) 
+	c = 1
+	v_list = []
+	for i in range(max_loop):
+		os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
+		number = str(c)
+		version = f'{ini}-{number}-welt_data.csv'
+		print("VERSIONS NUMMER:  ",version)
+		print("___________________________________")
+		df = pd.read_csv(version)
+		article = df['article']
+		time = list(df['time'])
+		summary = list(df['summary'])
+		hd = df['headline']
+		headline = [i for i in hd]
+
+		# New Article Name:
+		name = headline[0]
+		try:
+			name2 = name.split()
+			nn = run.clean_name(name2)
+			new_version_number = number + "-" + nn + '-' + ini + ".csv"
+		except:
+			new_version_number = number + "-" + 'NAN' + '-01-04-2020' + ".csv"
+		v_list.append(new_version_number)
+		try:  # TRY: Weil bei Artikeln ohne Inhalt sonst ein Fehler kommt
+			data = [i.split(".") for i in article][0]
+		except:
+			print(" - - - VERSION: {version}   hat einen Fehler. Möglicherweiße kein Inhalt?!")
+			c += 1
+			continue
+		# EXCECUTE
+		output, link_liste = run.article_clean(data, headline, time, summary, article, new_version_number)
+
+		sleep(1)
 		c += 1
-		continue
-	# EXCECUTE
-	output, link_liste = run.article_clean(data, headline, time, summary, article, new_version_number)
 
-	sleep(1)
-	c += 1
-
-	print("___________________________________")
-f = open('versionsnamen_liste.txt', 'w')
-f.write(v_list)
-print(len(output))
-print(len(link_liste))
+		print("___________________________________")
+	f = open('versionsnamen_liste.txt', 'w')
+	f.write(v_list)
+	print(len(output))
+	print(len(link_liste))
