@@ -96,12 +96,11 @@ while y <= max_days:
 
 		# New Article Name:
 		name = headline[0]
-		try:
-			name2 = name.split()
-			nn = run.clean_name(name2)
-			new_version_number = number + "-" + nn + '-' + ini + ".csv"
-		except:
-			new_version_number = number + "-" + 'NAN' + '-01-04-2020' + ".csv"
+		name2 = name.split()
+		nn = run.clean_name(name2)
+		new_version_number = number + "-" + nn + '-' + ini + ".csv"
+		# except:
+		# 	new_version_number = number + "-" + 'NAN' + '-01-04-2020' + ".csv"
 		v_list.append(new_version_number)
 		try:  # TRY: Weil bei Artikeln ohne Inhalt sonst ein Fehler kommt
 			data = [i.split(".") for i in article][0]
