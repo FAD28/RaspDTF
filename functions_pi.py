@@ -71,8 +71,8 @@ master = 1
 y = 1
 max_days = 14
 while y <= max_days:
-    print("DAY NUMBER: ", y, "/", max_days)
-    max_loop = int(100) 
+	print("DAY NUMBER: ", y, "/", max_days)
+	max_loop = int(100) 
 	c = 1
 	v_list = []
 	for i in range(max_loop):
