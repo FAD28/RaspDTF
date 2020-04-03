@@ -90,7 +90,11 @@ while y <= max_days:
 		version = f'03-04-2020-{number}-welt_data.csv'
 		print("VERSIONS NUMMER:  ",version)
 		print("___________________________________")
-		df = pd.read_csv(version)
+		try:
+			df = pd.read_csv(version)
+		except:
+			print("EEEE")
+			continue
 		article = df['article']
 		time = list(df['time'])
 		summary = list(df['summary'])
