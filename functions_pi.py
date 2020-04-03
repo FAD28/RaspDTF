@@ -59,7 +59,10 @@ class Functions:
 			i5 = i4.replace('–',"")
 			i6 = i5.replace('„','')
 			i7 = i6.replace('“','')
-			new_list.append(i7)
+			i8 = i7.replace("?",'')
+			i9 = i8.replace("!",'')
+			i10 = i9.replace("€",'')
+			new_list.append(i10)
 		nn= "_".join(new_list)
 		return nn
 
