@@ -98,7 +98,7 @@ while y <= max_days:
 		name = headline[0]
 		name2 = name.split()
 		nn = run.clean_name(name2)
-		new_version_number = number + "-" + nn + '-' + ini + ".csv"
+		new_version_number = number + "-" + nn + '-' + '03-04-2020' + ".csv"
 		# except:
 		# 	new_version_number = number + "-" + 'NAN' + '-01-04-2020' + ".csv"
 		v_list.append(new_version_number)
