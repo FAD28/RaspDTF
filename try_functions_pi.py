@@ -84,7 +84,7 @@ while y <= max_days:
 	for i in range(max_loop):
 		os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
 		number = str(c)
-		version = f'{datum}-{number}-welt_data.csv'
+		version = f'03-04-2020-{number}-welt_data.csv'
 		print("VERSIONS NUMMER:  ",version)
 		print("___________________________________")
 		df = pd.read_csv(version)
