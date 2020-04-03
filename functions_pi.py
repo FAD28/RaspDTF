@@ -62,7 +62,9 @@ class Functions:
 			i8 = i7.replace("?",'')
 			i9 = i8.replace("!",'')
 			i10 = i9.replace("€",'')
-			new_list.append(i10)
+			i11 = i10.replace("(",'')
+			i12 = i11.replace(")",'')
+			new_list.append(i12)
 		nn= "_".join(new_list)
 		return nn
 
@@ -123,9 +125,13 @@ while y <= max_days:
 		c += 1
 
 		print("___________________________________")
+	print("SUCCESS DATA CONVERTED * * *")
 	f = open(f'{ll}-versionsnamen_liste-{datum}.txt', 'w')
-	f.write(v_list)
+	f.write(str(v_list))
 	y += 1
+	print("Going to Sleep *_*  zZZ")
+	sleep(86400)
+	
 
 
 

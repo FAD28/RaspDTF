@@ -62,7 +62,9 @@ class Functions:
 			i8 = i7.replace("?",'')
 			i9 = i8.replace("!",'')
 			i10 = i9.replace("€",'')
-			new_list.append(i10)
+			i11 = i10.replace("(",'')
+			i12 = i11.replace(")",'')
+			new_list.append(i12)
 		nn= "_".join(new_list)
 		return nn
 
