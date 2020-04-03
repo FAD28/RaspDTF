@@ -9,6 +9,9 @@ from tqdm import tqdm
 import itertools
 import os
 
+now = datetime.datetime.now()
+date = now.strftime("%d-%m-%Y")
+zeit = now.strftime("%H:%M")
 link = "https://www.taz.de/"
 
 class TazScraping:
