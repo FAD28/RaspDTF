@@ -123,7 +123,7 @@ while y <= max_days:
 
 		print("___________________________________")
 	f = open(f'{ll}-versionsnamen_liste-{datum}.txt', 'w')
-	f.write(v_list)
+	f.write(str(v_list))
 	y += 1
 
 
