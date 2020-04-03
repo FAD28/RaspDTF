@@ -50,8 +50,11 @@ class TazScraping:
 			if item.startswith('/Galerie/'):
 				links_list.remove(item)
 
-			if '#matomo' in item:
-				links_list.remove(item)
+			try:
+				if '#matomo' in item:
+					links_list.remove(item)
+			except:
+				pass
 
 		print("Useful Links =  ",len(links_list))
 		os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/links")    # PATH TO DIRECT
