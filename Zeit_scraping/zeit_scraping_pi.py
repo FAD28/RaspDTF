@@ -65,7 +65,7 @@ class ZeitScraping:
                     print("* Update html_pages *")
 
         print("---> KOMPLETTE LINKS <---")
-        soup2 = bs(self.article, 'lxml')
+        soup2 = bs(article, 'lxml')
         for linki in soup2.find_all('a', class_='article-toc__onesie'):
             if linki.has_attr('href'):
                 classic = linki.attrs['href']
