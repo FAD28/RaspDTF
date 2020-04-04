@@ -55,17 +55,22 @@ while y <= max_days:
     #print("")
     #print("______________________________", ini, "-----")
     while x < max_loop: 
-            v_num = str(x)
-            var_datum = ini + "-"
-            version = var_datum + v_num +'-welt_data' + '.csv'
-            print(version)
-            try:
-                    pre_processing(version)
-            except:
-                    print("No more Files available.")
-            time.sleep(1)
-            x += 1
+        v_num = str(x)
+        var_datum = ini + "-"
+        version = var_datum + v_num +'-welt_data' + '.csv'
+        print(version)
+        try:
+                pre_processing(version)
+        except:
+                print("No more Files available.")
+        time.sleep(1)
+        x += 1
     y += 1
+    print(" ")
+    print(" ... ")
+    print(" ")
+    print("Going to Sleep ** --> zZZ")
+    sleep(86400)
 # new_version = datum + str(num) +'-welt_data' + '.csv'
 # reading_file(version,num)
 
