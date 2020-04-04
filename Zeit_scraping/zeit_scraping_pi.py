@@ -4,7 +4,7 @@ import os
 from datetime import date
 import simplejson as json
 
-class Zeit_HTML:
+class ZeitScraping:
 
     def __init__(self):
         self.zeit_html = requests.get(link).text
@@ -127,7 +127,7 @@ class Zeit_HTML:
         print("")
 
 os.chdir("/media/pi/datadrive/databank/ZEIT-SCRAPING/output")
-run = Zeit_HTML()
+run = ZeitScraping()
 run.show_html()
 run.show_info()
 run.create_json()
