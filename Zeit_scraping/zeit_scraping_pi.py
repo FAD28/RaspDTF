@@ -129,6 +129,8 @@ class ZeitScraping:
 
 master = 1 
 max_days = 14
+print(" >>>>>>>>>>>>>>>>>>>> START <<<<<<<<<<<<<<<<<<<<<")
+link = "https://www.zeit.de/index"
 while master <= max_days:
     os.chdir("/media/pi/datadrive/databank/ZEIT-SCRAPING/output")
     run = ZeitScraping()
