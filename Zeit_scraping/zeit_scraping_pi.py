@@ -3,6 +3,7 @@ import time
 import os
 from datetime import date
 import simplejson as json
+import requests
 
 class ZeitScraping:
 
