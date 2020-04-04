@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup as bs
 import time
 import os
 from datetime import date
+import datetime
 import simplejson as json
 import requests
 
@@ -27,9 +28,11 @@ class ZeitScraping:
         print(" Datum heute ist: ", self.Heute)
         print("")
 
-    def create_json(self):    
+    def create_json(self): 
+        now = datetime.datetime.now()
+        datum = now.strftime("%d-%m-%Y")
         try:
-            with open('result.json', 'r') as fp:
+            with open(f'{datum}-result.json', 'r') as fp:
                 self.file = json.load(fp)
         except:
             self.file = None
@@ -76,7 +79,7 @@ class ZeitScraping:
                 self.list2.append(linki.attrs['href']) # Hinzufügen der Links in list 2
 
         os.chdir("/media/pi/datadrive/databank/ZEIT-SCRAPING/links")
-        with open('result.json', 'w+') as fp:
+        with open(f'{datum}-result.json', 'w+') as fp:
             json.dump(self.html_pages, fp) # fp = filepointer objekt
         return self.let, self.list2
 
@@ -127,6 +130,9 @@ class ZeitScraping:
         print(f" --> {self.let} <-- ")
         print("")
 
+now = datetime.datetime.now()
+datum = now.strftime("%d-%m-%Y")
+uhrzeit = now.strftime("%H:%M")
 master = 1 
 max_days = 14
 print(" >>>>>>>>>>>>>>>>>>>> START <<<<<<<<<<<<<<<<<<<<<")
@@ -142,6 +148,10 @@ while master <= max_days:
     run.write_output()
     run.write_txt()
     master += 1
+    now = datetime.datetime.now()
+    datum = now.strftime("%d-%m-%Y")
+    uhrzeit = now.strftime("%H:%M")
+    print(datum, "---", uhrzeit)
     print(" ")
     print(" ... ")
     print(" ")
