@@ -86,6 +86,7 @@ class ZeitParsing:
                     i16 = i15.replace(",","")
                     i17 = i16.replace('"',"")
                     i18 = i17.replace("'","")
+                    i19 = i18.replace("\n","")
                     new_list.append(i18)
                 nn= "_".join(new_list)
                 return nn
