@@ -268,32 +268,29 @@ run = WeltScraping()
 # run.get_links()
 
 #x = input("Do you have the links to run the script? (y/n)?")
-master = 0 
-
-
 
 #if x == "y":
 print("Aktuelle Uhrzeit ist: ",uhrzeit)
 #ml = input("How many Days you want to scrape? ")
 max_loop = int(14)
-
+master = 1 
 while master <= max_loop:
-        now = datetime.datetime.now()
-        date = now.strftime("%d-%m-%Y")
-        uhrzeit = now.strftime("%H:%M")
-        print("Current date is:", date)
-        print("Current time is:", uhrzeit)
-        run.get_links()
-        run.modify_links()
-        run.scrape_articles()
-        print("Aktuelle Uhrzeit ist: ",uhrzeit)
-        print("DAY NUMBER, ----->", master, " - SUCCESS")
-        master += 1
-        print(" ")
-        print(" ... ")
-        print(" ")
-        print("Going to Sleep ** --> zZZ")
-        sleep(86400)
+    now = datetime.datetime.now()
+    date = now.strftime("%d-%m-%Y")
+    uhrzeit = now.strftime("%H:%M")
+    print("Current date is:", date)
+    print("Current time is:", uhrzeit)
+    run.get_links()
+    run.modify_links()
+    run.scrape_articles()
+    print("Aktuelle Uhrzeit ist: ",uhrzeit)
+    print("DAY NUMBER, ----->", master, " - SUCCESS")
+    master += 1
+    print(" ")
+    print(" ... ")
+    print(" ")
+    print("Going to Sleep ** --> zZZ")
+    sleep(86400)
 # run.get_comments_selenium()  # HABE FESTGESTELLT DAS ICH DAS GARNICHT BRAUCHE WEIL #Comments
 # run.driver_start()
 # run.driver_create_list()
