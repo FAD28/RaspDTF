@@ -80,7 +80,7 @@ class ZeitScraping:
         return self.let, self.list2
 
     def write_output(self):
-    	os.chdir("/media/pi/datadrive/databank/ZEIT-SCRAPING/output")
+        os.chdir("/media/pi/datadrive/databank/ZEIT-SCRAPING/output")
         for url2 in self.list2:
             k = 1
             while os.path.exists(f"{self.Heute}_comp_art_{k}.html"):
@@ -126,15 +126,24 @@ class ZeitScraping:
         print(f" --> {self.let} <-- ")
         print("")
 
-os.chdir("/media/pi/datadrive/databank/ZEIT-SCRAPING/output")
-run = ZeitScraping()
-run.show_html()
-run.show_info()
-run.create_json()
-run.find_links()
-run.search_links()
-run.write_output()
-run.write_txt()
+master = 1 
+max_days = 14
+while master <= max_days:
+    os.chdir("/media/pi/datadrive/databank/ZEIT-SCRAPING/output")
+    run = ZeitScraping()
+    run.show_html()
+    run.show_info()
+    run.create_json()
+    run.find_links()
+    run.search_links()
+    run.write_output()
+    run.write_txt()
+    master += 1
+    print(" ")
+    print(" ... ")
+    print(" ")
+    print("Going to Sleep ** --> zZZ")
+    sleep(86400)
 
 print(" Alles geklappt, Spitze! 👾👾👾 😁😁 👾👾👾 ")
 print("")
