@@ -13,7 +13,7 @@ import datetime, csv
 
 now = datetime.datetime.now()
 print(now)
-datum = now.strftime('%d-%m-%Y-')
+datum = now.strftime('%d-%m-%Y')
 
 def pre_processing(version):
 	os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
