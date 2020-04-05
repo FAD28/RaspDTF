@@ -78,7 +78,7 @@ y = 1
 max_days = 14
 while y <= max_days:
 	now = datetime.datetime.now()
-	datum = now.strftime('%d-%m-%Y-')
+	datum = now.strftime('%d-%m-%Y')
 	print("START: * _ * ", datum)
 	print("DAY NUMBER: ", y, "/", max_days)
 	max_loop = int(100) 
