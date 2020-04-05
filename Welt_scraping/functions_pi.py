@@ -14,7 +14,7 @@ import datetime
 
 class Functions:
 	def __init__(self):
-		self.remove_me = '/media/pi/datadrive/databank/WELT-SCRAPING/RaspDTF/remove_me_welt.csv'
+		self.remove_me = '/media/pi/datadrive/databank/WELT-SCRAPING/RaspDTF/Welt_scraping/remove_me_welt.csv'
 		self.rm = pd.read_csv(self.remove_me, header = None)
 		self.rm_list = list(self.rm[0])
 		self.output = []

@@ -70,7 +70,7 @@ while y <= max_days:
     print(" ... ")
     print(" ")
     print("Going to Sleep ** --> 24 hours zZZ")
-    sleep(86400)
+    time.sleep(86400)
 # new_version = datum + str(num) +'-welt_data' + '.csv'
 # reading_file(version,num)
 
