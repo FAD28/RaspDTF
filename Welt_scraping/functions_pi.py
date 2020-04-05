@@ -129,7 +129,7 @@ while y <= max_days:
 	f = open(f'{ll}-versionsnamen_liste-{datum}.txt', 'w')
 	f.write(str(v_list))
 	y += 1
-	print("Going to Sleep *_*  zZZ")
+	print("Going to Sleep *_* --> 24 hours zZZ")
 	sleep(86400)
 	
 

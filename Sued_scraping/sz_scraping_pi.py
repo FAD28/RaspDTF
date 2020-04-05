@@ -138,7 +138,7 @@ while master <= max_days:
     print(" ")
     print(" ... ")
     print(" ")
-    print("Going to Sleep ** --> zZZ")
+    print("Going to Sleep ** --> 12 hours zZZ")
     time.sleep(43200)
 
 print(" Alles geklappt, Spitze! 👾👾👾 😁😁 👾👾👾 ")

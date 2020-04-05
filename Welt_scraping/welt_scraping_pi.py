@@ -217,5 +217,5 @@ while master <= max_loop:
 	print(" ")
 	print(" ... ")
 	print(" ")
-	print("Going to Sleep ** --> zZZ")
+	print("Going to Sleep ** --> 24 hours zZZ")
 	sleep(86400)
