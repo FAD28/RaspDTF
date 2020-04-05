@@ -44,7 +44,7 @@ while y <= max_days:
     print("DAY NUMBER: ", y, "/", max_days)
     now = datetime.datetime.now()
     print(now)
-    datum = now.strftime('%d-%m-%Y-')
+    datum = now.strftime('%d-%m-%Y')
     print("_______________________")
     time.sleep(4)
     x = 1
