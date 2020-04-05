@@ -35,7 +35,7 @@ class SzScraping:
         now = datetime.datetime.now()
         datum = now.strftime("%d-%m-%Y")
         try:
-            with open(f'{datum}-zeit_data-result.json', 'r') as fp:
+            with open(f'{datum}-zeit_data-{self.cc}.json', 'r') as fp:
                 self.file = json.load(fp)
         except:
             self.file = None

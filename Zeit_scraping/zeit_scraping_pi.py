@@ -149,6 +149,7 @@ while master <= max_days:
     run.write_output()
     run.write_txt()
     master += 1
+    run.cc += 1
     now = datetime.datetime.now()
     datum = now.strftime("%d-%m-%Y")
     uhrzeit = now.strftime("%H:%M")
