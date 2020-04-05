@@ -8,10 +8,10 @@ import requests
 
 class SzScraping:
 
-    def __init__(self):
+    def __init__(self, link):
         self.sz_html = requests.get(link).text
         self.soup = bs(self.sz_html, 'lxml')
-        #self.a = ["classic", "wide", "standard"]
+        self.link = link
         self.liste = []
         self.list2 = [] # Die Liste der vollständigen Artikel
         self.let = [] 
@@ -120,7 +120,7 @@ while master <= max_days:
     now = datetime.datetime.now()
     datum = now.strftime("%d-%m-%Y")
     print("------>", datum, "---", uhrzeit, "<-------")
-    run = SzScraping()
+    run = SzScraping(link)
     run.show_html()
     run.show_info()
     run.create_json()
