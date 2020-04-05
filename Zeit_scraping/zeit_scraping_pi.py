@@ -18,6 +18,7 @@ class ZeitScraping:
         self.html_pages = {}
         self.file = None
         self.Heute = date.today()
+        self.cc = 1
 
     def show_html(self):
         return print(self.zeit_html)
@@ -32,7 +33,7 @@ class ZeitScraping:
         now = datetime.datetime.now()
         datum = now.strftime("%d-%m-%Y")
         try:
-            with open(f'{datum}-result.json', 'r') as fp:
+            with open(f'{datum}-result-{self.cc}.json', 'r') as fp:
                 self.file = json.load(fp)
         except:
             self.file = None
@@ -79,7 +80,7 @@ class ZeitScraping:
                 self.list2.append(linki.attrs['href']) # Hinzufügen der Links in list 2
 
         os.chdir("/media/pi/datadrive/databank/ZEIT-SCRAPING/links")
-        with open(f'{datum}-result.json', 'w+') as fp:
+        with open(f'{datum}-result-{self.cc}.json', 'w+') as fp:
             json.dump(self.html_pages, fp) # fp = filepointer objekt
         return self.let, self.list2
 
