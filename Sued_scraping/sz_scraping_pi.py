@@ -19,6 +19,8 @@ class SzScraping:
         self.file = None
         self.Heute = date.today()
         self.cc = 1
+        self.link_times_liste = []
+        self.link_liste = []
 
     def show_html(self):
         return print(self.sz_html)
