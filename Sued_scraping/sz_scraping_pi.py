@@ -18,7 +18,6 @@ class SzScraping:
         self.html_pages = {}
         self.file = None
         self.Heute = date.today()
-        self.cc = 1
         self.link_times_liste = []
         self.link_liste = []
 
@@ -35,7 +34,7 @@ class SzScraping:
         now = datetime.datetime.now()
         datum = now.strftime("%d-%m-%Y")
         try:
-            with open(f'{datum}-zeit_data-{self.cc}.json', 'r') as fp:
+            with open(f'{datum}-sued_JSON-{cc}.json', 'r') as fp:
                 self.file = json.load(fp)
         except:
             self.file = None
@@ -72,7 +71,7 @@ class SzScraping:
                     print("* Update html_pages *")
 
         os.chdir("/media/pi/datadrive/databank/SUED-SCRAPING/links")
-        with open(f'{datum}-zeit_data-result-{self.cc}.json', 'w+') as fp:
+        with open(f'{datum}-zeit_data-result-{cc}.json', 'w+') as fp:
             json.dump(self.html_pages, fp) # fp = filepointer objekt
         return self.let, self.list2
 
@@ -105,7 +104,7 @@ class SzScraping:
 
         os.chdir("/media/pi/datadrive/databank/SUED-SCRAPING/links")
         #os.chdir("/media/pi/datadrive/databank/WELT-SCRAPING/links")
-        with open(f'{datum}-suedz_links-{self.cc}.txt', 'w') as file:
+        with open(f'{datum}-suedz_links-{cc}.txt', 'w') as file:
             for element in n_ziped_list:
                 file.write(element + "\n")
 
@@ -115,6 +114,7 @@ datum = now.strftime("%d-%m-%Y")
 uhrzeit = now.strftime("%H:%M")
 master = 1 
 max_days = 14
+cc = 1
 print(" >>>>>>>>>>>>>>>>>>>> START <<<<<<<<<<<<<<<<<<<<<")
 link = 'https://www.sueddeutsche.de/news?search=&sort=time&all%5B%5D=dep&all%5B%5D=typ&sys%5B%5D=sz&sys%5B%5D=dpa&catsz%5B%5D=szOverviewPageThemes&catdpa%5B%5D=alles&time=P1D'
 while master <= max_days:
@@ -130,7 +130,7 @@ while master <= max_days:
     run.search_links()
     run.get_links()
     master += 1
-    run.cc += 1
+    cc += 1
     now = datetime.datetime.now()
     datum = now.strftime("%d-%m-%Y")
     uhrzeit = now.strftime("%H:%M")
