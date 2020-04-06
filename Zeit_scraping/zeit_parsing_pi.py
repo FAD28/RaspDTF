@@ -19,7 +19,7 @@ class ZeitParsing:
 
     def main(self):
         os.chdir("/media/pi/datadrive/databank/ZEIT-SCRAPING/links")
-        with open(f'{datum}-result.json', 'r') as fp:
+        with open(f'{datum}-Zeit_JSON-{cc}.json', 'r') as fp:
             file = json.load(fp)
 
         for value in file.values(): # items() gibt immer key-value paare zurück.
@@ -87,7 +87,9 @@ class ZeitParsing:
                     i17 = i16.replace('"',"")
                     i18 = i17.replace("'","")
                     i19 = i18.replace("\n","")
-                    new_list.append(i18)
+                    i20 = i19.replace("»","")
+                    i21 = i20.replace("«","")
+                    new_list.append(i21)
                 nn= "_".join(new_list)
                 return nn
 
@@ -95,7 +97,9 @@ class ZeitParsing:
             def create_output(colnames_liste, liste1, liste2, liste3, liste4, liste5, liste6, liste7):
                     os.chdir("/media/pi/datadrive/databank/ZEIT-SCRAPING/output")
                     #print(" NEW PATH is:", os.getcwd())
-                    
+                    now = datetime.datetime.now()
+                    datum = now.strftime("%d-%m-%Y")
+
                     with open(f'{self.counter}-{v_name}-{datum}-ZEIT.csv','w') as f: 
                         writer = csv.writer(f)
                         writer.writerow(colnames_liste)
@@ -115,12 +119,14 @@ class ZeitParsing:
             #print(df.keys())
 master = 1
 max_days = 14
+cc = 1
 print(" START:", datum)
 while master <= max_days:
     print(f"DAY NUMBER: {master} / 14")
     run = ZeitParsing()
     run.main()
     master += 1
+    cc += 1
     print("Going to sleep *_* zZZ")
     time.sleep(86400)
 print("##################################")

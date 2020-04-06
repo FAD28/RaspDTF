@@ -18,7 +18,6 @@ class ZeitScraping:
         self.html_pages = {}
         self.file = None
         self.Heute = date.today()
-        self.cc = 1
 
     def show_html(self):
         return print(self.zeit_html)
@@ -33,7 +32,7 @@ class ZeitScraping:
         now = datetime.datetime.now()
         datum = now.strftime("%d-%m-%Y")
         try:
-            with open(f'{datum}-result-{self.cc}.json', 'r') as fp:
+            with open(f'{datum}-Zeit_JSON-{cc}.json', 'r') as fp:
                 self.file = json.load(fp)
         except:
             self.file = None
@@ -80,7 +79,7 @@ class ZeitScraping:
                 self.list2.append(linki.attrs['href']) # Hinzufügen der Links in list 2
 
         os.chdir("/media/pi/datadrive/databank/ZEIT-SCRAPING/links")
-        with open(f'{datum}-result-{self.cc}.json', 'w+') as fp:
+        with open(f'{datum}-Zeit_JSON-{cc}.json', 'w+') as fp:
             json.dump(self.html_pages, fp) # fp = filepointer objekt
         return self.let, self.list2
 
@@ -136,6 +135,7 @@ datum = now.strftime("%d-%m-%Y")
 uhrzeit = now.strftime("%H:%M")
 master = 1 
 max_days = 14
+cc = 1
 print(" >>>>>>>>>>>>>>>>>>>> START <<<<<<<<<<<<<<<<<<<<<")
 link = "https://www.zeit.de/index"
 while master <= max_days:
@@ -149,7 +149,7 @@ while master <= max_days:
     run.write_output()
     run.write_txt()
     master += 1
-    run.cc += 1
+    cc += 1
     now = datetime.datetime.now()
     datum = now.strftime("%d-%m-%Y")
     uhrzeit = now.strftime("%H:%M")
