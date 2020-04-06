@@ -127,7 +127,7 @@ while master <= max_days:
     run.main()
     master += 1
     cc += 1
-    print("Going to sleep *_* zZZ")
+    print("Going to sleep *_* ---> 24 hours zZZ      ZEIT PARSING ")
     time.sleep(86400)
 print("##################################")
 
