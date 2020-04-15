@@ -13,30 +13,33 @@ os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/processed_out")
 failed = []
 cc = 1
 for i in paths:
-	print(cc)
-	datum = i[62:72]
-	df = pd.read_csv(i, header = 0,delimiter= ";")
-	colnames = list(df['0'])
-	headline = df['1'][0]
-	article = df['1'][1]
-	meta_data = df['1'][2]
-	intro_data = df['1'][3]
-	h4_data = df['1'][4]
-	comments_data = df['1'][5]
-	author = df['1'][6]
-	versionsname = DC.clean_filename([headline])
-	new_dataformat= {
-	'headline': [headline],
-	'article': [article],
-	'author': [author],
-	'comments': [comments_data],
-	'h4': [h4_data],
-	'intro': [intro_data],
-	'meta_data': [meta_data] }
-	new_df = pd.DataFrame(new_dataformat)
-	new_df.to_csv(f"{cc}-{versionsname}-{datum}.csv", sep= ";")
-	cc += 1 
+	try:
+		print(cc)
+		datum = i[62:72]
+		df = pd.read_csv(i, header = 0,delimiter= ";")
+		colnames = list(df['0'])
+		headline = df['1'][0]
+		article = df['1'][1]
+		meta_data = df['1'][2]
+		intro_data = df['1'][3]
+		h4_data = df['1'][4]
+		comments_data = df['1'][5]
+		author = df['1'][6]
+		versionsname = DC.clean_filename([headline])
+		new_dataformat= {
+		'headline': [headline],
+		'article': [article],
+		'author': [author],
+		'comments': [comments_data],
+		'h4': [h4_data],
+		'intro': [intro_data],
+		'meta_data': [meta_data] }
+		new_df = pd.DataFrame(new_dataformat)
+		new_df.to_csv(f"{cc}-{versionsname}-{datum}.csv", sep= ";")
+		cc += 1 
+	except:
+		failed.append(i)
 print("SUCCESS FILES HAVE BEEN CONVERTED * * *")
 # 	#time.sleep(1)
-# fail = open("failed.txt", "a")
-# fail.write(str(failed))
+fail = open("failed.txt", "a")
+fail.write(failed)
