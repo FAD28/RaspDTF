@@ -40,7 +40,7 @@ def pre_processing(version):
 # EXECUTE
 y = 1
 max_days = 14
-while y <= max_days:
+while True:
     print("DAY NUMBER: ", y, "/", max_days)
     now = datetime.datetime.now()
     print(now)
