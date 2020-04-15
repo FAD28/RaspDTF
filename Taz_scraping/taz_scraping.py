@@ -182,56 +182,14 @@ class TazScraping:
 		print("_______________________________________________________________________________")
 		print("START TIME IS:", zeit)
 
-	def selenium_open(self):
-		x = 0
-		print(links_list[x])
-		time.sleep(3)
-		self.driver = webdriver.Chrome(executable_path='/Users/Fabi/Downloads/chromedriver')
-		self.driver.get(f'https://www.taz.de/{links_list[x]}')
-		time.sleep(5)
-		try:
-			print("FIRST XPath for nerv_nicht_button ***")
-			nerv_nicht_button = self.driver.find_element_by_xpath('//*[@id="tzi-paywahl-fg"]/div/ul[1]/li/a')
-		except:
-			print("SECOND XPath for nerv_nicht_button ***")
-			nerv_nicht_button = self.driver.find_element_by_xpath('//*[@id="tzi-paywahl-fg"]/div/ul/li[2]/a')
-		time.sleep(2)
-		nerv_nicht_button.click()
-		print("Closing all?")
-		time.sleep(2)
-		try:
-			driver.switch_to.window(driver.window_handles[1])
-			driver.close()
-		except:
-			pass
-		time.sleep(3)
-		x += 1
-
-	def selenium_find_comments(self):
-		time.sleep(4)
-		try:
-			driver.switch_to.window(driver.window_handles[1])
-			driver.close()
-		except:
-			pass
-		time.sleep(4)
-		for elements in self.driver.find_elements_by_xpath('//div[@class="objlink nolead"]'):
-			print(elements.text)
-			#//div[@class="objlink nolead"]
-			#//*[@id="bb_message_3930674"]/div/p
-			#//*[@id="bb_message_3930657"]/div/p
-			#//*[@id="bb_message_3930674"]/div
-			#//*[@id="pages"]/div[4]/span/div[2]/ul
-			# kommentare_list.append(elements.text)
-
 run = TazScraping()
 # run.driver_start()
 run.get_links(link)
 links_list =run.clean_links()
 print("_______________________________________________________________________________")
 x = 1
-while x <= 14:
-	print("START: *_*  DAY: ", x, "/14")
+while True:
+	print("START: *_*  DAY: ", x )
 	now = datetime.datetime.now()
 	date = now.strftime("%d-%m-%Y")
 	zeit = now.strftime("%H:%M")
@@ -239,9 +197,6 @@ while x <= 14:
 	print("")
 	time.sleep(2)
 	run.get_data()
-	#run.selenium_open()
-	# time.sleep(2)
-	#run.selenium_find_comments()
 	print("COUNTER: ",x)
 	zeit = now.strftime("%H:%M")
 	print(f"DATE IS: {date} - - - TIME IS: {zeit}")
