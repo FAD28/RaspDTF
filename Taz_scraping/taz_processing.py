@@ -38,7 +38,7 @@ for i in paths:
 		new_df.to_csv(f"{cc}-{versionsname}-{datum}.csv", sep= ";")
 		cc += 1 
 	except:
-		failed.append(i)
+		failed.append(str(i))
 print("SUCCESS FILES HAVE BEEN CONVERTED * * *")
 # 	#time.sleep(1)
 fail = open("failed.txt", "a")
