@@ -121,8 +121,8 @@ master = 1
 max_days = 14
 cc = 1
 print(" START:", datum)
-while master <= max_days:
-    print(f"DAY NUMBER: {master} / 14")
+while True:
+    print(f"DAY NUMBER: {master}")
     run = ZeitParsing()
     run.main()
     master += 1
