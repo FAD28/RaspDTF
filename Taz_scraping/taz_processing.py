@@ -42,4 +42,4 @@ for i in paths:
 print("SUCCESS FILES HAVE BEEN CONVERTED * * *")
 # 	#time.sleep(1)
 fail = open("failed.txt", "a")
-fail.write(failed)
+fail.write(str(failed))
