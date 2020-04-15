@@ -76,7 +76,8 @@ master = 1
 
 y = 1
 max_days = 14
-while y <= max_days:
+while True:
+	print("START: *_*  DAY: ", y )
 	now = datetime.datetime.now()
 	datum = now.strftime('%d-%m-%Y')
 	print("START: * _ * ", datum)
