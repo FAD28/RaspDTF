@@ -8,6 +8,8 @@ import datetime
 from tqdm import tqdm
 import itertools
 import os
+from txtanalysis import DataCleaner as DC
+
 
 now = datetime.datetime.now()
 date = now.strftime("%d-%m-%Y")
@@ -80,10 +82,6 @@ class TazScraping:
 			cc += 1
 			print(cc)
 			time.sleep(10)
-			if cc == 10:
-				print("BREAK- WAITING FOR NEXT 10")
-				time.sleep(180)
-				cc = 0
 			soup = bs(html_article, 'lxml')
 
 			article_list = []
@@ -143,8 +141,9 @@ class TazScraping:
 				autor_kommentar_liste.append(author)
 
 			# ------->  VERSIONS NAME <---------
-
-			VERSION= f'{date}-{name_article}.csv'
+			
+			V= DC.clean_filename([name_article])
+			VERSION= f"{V}.csv"
 
 			def create_output(filename,liste1, liste2, liste3, liste4, liste5, liste6, liste7):
 				os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/output")				# PATH TO DIRECT
