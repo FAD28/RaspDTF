@@ -201,7 +201,8 @@ class WeltScraping:
 print("Aktuelle Uhrzeit ist: ",uhrzeit)
 max_loop = int(14)
 master = 1 
-while master <= max_loop:
+while True:
+	print("START: *_*  DAY: ", master )
 	run = WeltScraping()
 	now = datetime.datetime.now()
 	date = now.strftime("%d-%m-%Y")
