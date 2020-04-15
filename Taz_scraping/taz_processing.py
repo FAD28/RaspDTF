@@ -3,15 +3,17 @@ import os, time
 from txtanalysis import DataCleaner as DC
 from txtanalysis import DataWrangling as DW
 
-os.chdir("/Users/Fabi/PycharmProjects/Thesis/ANALYSIS/Thesis/Taz_sample")
+os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/output")
 paths = DW.get_all_paths(os.getcwd())
-print("\n".join(paths))
+os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/processed_out")
+#print("\n".join(paths))
 
 #tt = "/Users/Fabi/PycharmProjects/Thesis/ANALYSIS/Thesis/Taz_sample/05-04-2020-die_angst_geht_um.csv"
 
 failed = []
 cc = 1
 for i in paths:
+	print(cc)
 	datum = i[62:72]
 	df = pd.read_csv(i, header = 0,delimiter= ";")
 	colnames = list(df['0'])
