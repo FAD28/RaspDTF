@@ -117,7 +117,8 @@ max_days = 14
 cc = 1
 print(" >>>>>>>>>>>>>>>>>>>> START <<<<<<<<<<<<<<<<<<<<<")
 link = 'https://www.sueddeutsche.de/news?search=&sort=time&all%5B%5D=dep&all%5B%5D=typ&sys%5B%5D=sz&sys%5B%5D=dpa&catsz%5B%5D=szOverviewPageThemes&catdpa%5B%5D=alles&time=P1D'
-while master <= max_days:
+while True:
+    print("START: *_*  DAY: ", master )
     os.chdir("/media/pi/datadrive/databank/SUED-SCRAPING/links")
     now = datetime.datetime.now()
     datum = now.strftime("%d-%m-%Y")
