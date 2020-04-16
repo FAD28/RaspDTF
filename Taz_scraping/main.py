@@ -27,7 +27,7 @@ final_df = pd.DataFrame()
 total_paths = len(daten_pfade)
 #sleep(500)
 for pfad in daten_pfade:
-	print(f"LINK:{pfad}	*--------*   {cxl} / {total_paths}   "
+	print(f"LINK:{pfad}	*--------*   {cxl} / {total_paths}   ")
 	try:
 		df = pd.read_csv(pfad, sep = ";")
 		x = [i.split() for i in list(df['article'])][0]
