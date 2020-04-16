@@ -22,10 +22,12 @@ print("\n".join(daten_pfade))
 #print(len(daten_pfade))
 
 #testpfad = "/Users/Fabi/PycharmProjects/Thesis/ANALYSIS/Thesis/Sued_sample/1-Gesundheit--Düsseldorf--Geplantes-EpidemieGesetz-kommt-auf-den-Prüfstand.csv"
-
+cxl = 1
 final_df = pd.DataFrame()
+total_paths = len(daten_pfade)
 #sleep(500)
 for pfad in daten_pfade:
+	print(f"LINK:{pfad}	*--------*   {cxl} / {total_paths}   "
 	try:
 		df = pd.read_csv(pfad, sep = ";")
 		x = [i.split() for i in list(df['article'])][0]
@@ -91,6 +93,7 @@ for pfad in daten_pfade:
 	except:
 		print("Error:", i)
 		continue
+	cxl += 1
 os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/")
 final_df.to_csv('TAZ_results.csv', sep=";")
 print(" ----------------> SUCCESS= File: Sued_results.csv created * * * <----> CODE 0")
