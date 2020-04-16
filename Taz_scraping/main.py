@@ -66,7 +66,7 @@ for pfad in daten_pfade:
 		'headline': head,
 		'total_words': [cwords],
 		'total_polarity': [total_polarity],
-		'emotion_faktor': [efaktor]
+		'emotion_faktor': [efaktor],
 		'zorn_count': [czorn],
 		'erwartung_count': [cewar],
 		'ekel_count': [cekel],
