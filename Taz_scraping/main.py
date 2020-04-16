@@ -14,7 +14,7 @@ from HanTa import HanoverTagger as ht
 
 os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/processed_out")
 
-daten_pfade = list(set(DW.get_all_paths(os.getcwd()))
+daten_pfade = list(set(DW.get_all_paths(os.getcwd())))
 nlp = spacy.load('de')
 sentiws = spaCySentiWS(sentiws_path='/media/pi/datadrive/databank/TAZ-SCRAPING/RaspDTF/SentiWS_v2.0')
 nlp.add_pipe(sentiws)
