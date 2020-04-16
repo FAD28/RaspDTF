@@ -52,7 +52,7 @@ for pfad in daten_pfade:
 		# sleep(3)
 		print("::::: NRC ::::")
 		lxlw = [i.lower() for i in lx]
-		zorn, erwart, ekel, furcht, freude, trauer, überr, vertrauen = nrc.NRC_analysis(lxlw)
+		efaktor, zorn, erwart, ekel, furcht, freude, trauer, überr, vertrauen = nrc.NRC_analysis(lxlw)
 		cwords = len(x)
 		czorn = len(zorn)
 		cewar = len(erwart)
@@ -66,6 +66,7 @@ for pfad in daten_pfade:
 		'headline': head,
 		'total_words': [cwords],
 		'total_polarity': [total_polarity],
+		'emotion_faktor': [efaktor]
 		'zorn_count': [czorn],
 		'erwartung_count': [cewar],
 		'ekel_count': [cekel],
