@@ -21,10 +21,9 @@ def get_all_paths(x):
 				paths_liste.append(os.path.join(r,file))
 	return paths_liste
 
-paths_liste = get_all_paths(os.getcwd())
 
 def processing_sued(path_list):
-	#os.chdir('')
+	os.chdir('/media/pi/datadrive/databank/SUED-SCRAPING/processed_out')
 	counter = 1
 	for path in path_list:
 		file = open(path)
@@ -48,6 +47,7 @@ def processing_sued(path_list):
 		counter += 1
 	return data_frame
 
+paths_liste = get_all_paths("/media/pi/datadrive/databank/SUED-SCRAPING/output")
 processing_sued(paths_liste)
 
 

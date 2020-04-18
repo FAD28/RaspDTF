@@ -20,7 +20,7 @@ class ZeitParsing:
 
     def main(self):
         os.chdir("/media/pi/datadrive/databank/SUED-SCRAPING/links")
-        with open(f'{datum}-sued_JSON-{cc}.json', 'r') as fp:
+        with open(f'{datum}-sued_data-JSON-{cc}.json', 'r') as fp:
             file = json.load(fp)
 
         for key, value in file.items(): # items() gibt immer key-value paare zurück.
@@ -150,12 +150,14 @@ master = 1
 max_days = 14
 cc = 1
 print(" START:", datum)
-while master <= max_days:
+while True:
     print(f"DAY NUMBER: {master} / 14")
     run = ZeitParsing()
     run.main()
     master += 1
     cc += 1 
-    print("Going to sleep *_* --> 24 hours zZZ")
-    time.sleep(86400)
+    uhrzeit = now.strftime("%H:%M")
+    print("SUCCESS  ----> ",uhrzeit)
+    print("Going to sleep *_* --> 12 hours zZZ")
+    time.sleep(43200)
 print("##################################")
