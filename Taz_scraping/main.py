@@ -15,11 +15,7 @@ from HanTa import HanoverTagger as ht
 os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/processed_out")
 
 dp = list(set(DW.get_all_paths(os.getcwd())))
-daten_pfade = []
-for i in dp: 
-    print(i[60:70])
-    if i[60:80] not in daten_pfade: 
-        daten_pfade.append(i) 
+daten_pfade = list(set(dp)) 
 print("DIE ANZAHL DER LINKS IST: ", len(daten_pfade))
 sleep(5)
 nlp = spacy.load('de')
