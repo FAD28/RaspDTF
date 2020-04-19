@@ -14,11 +14,17 @@ from HanTa import HanoverTagger as ht
 
 os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/processed_out")
 
-daten_pfade = list(set(DW.get_all_paths(os.getcwd())))
+dp = list(set(DW.get_all_paths(os.getcwd())))
+daten_pfade = []
+for i in alle: 
+    print(i[60:70])
+    if i[60:70] not in daten_pfade: 
+        daten_pfade.append(i) 
+len("DIE ANZAHL DER LINKS IST: ", daten_pfade)
 nlp = spacy.load('de')
 sentiws = spaCySentiWS(sentiws_path='/media/pi/datadrive/databank/TAZ-SCRAPING/RaspDTF/SentiWS_v2.0')
 nlp.add_pipe(sentiws)
-print("\n".join(daten_pfade))
+#print("\n".join(daten_pfade))
 #print(len(daten_pfade))
 
 #testpfad = "/Users/Fabi/PycharmProjects/Thesis/ANALYSIS/Thesis/Sued_sample/1-Gesundheit--Düsseldorf--Geplantes-EpidemieGesetz-kommt-auf-den-Prüfstand.csv"
@@ -40,6 +46,7 @@ for pfad in daten_pfade:
 		lx = [tagger.analyze(i)[0] for i in x]
 		polarity_scores = []
 		found_words = []
+		xx = 0
 		for i in tqdm(lx): 
 			doc = nlp(i)
 			for t in doc: 
@@ -47,12 +54,16 @@ for pfad in daten_pfade:
 					tupi = (t.text,t._.sentiws)
 					polarity_scores.append(tupi)
 					found_words.append(t.text)
+					xx += 1
 		total_polarity = round(sum(n for _, n in polarity_scores)/len(found_words),4)
+		stp_wörter = DW.load_stopwords()
+		x_ohne_stp = DW.remove_stopwords(x, stp_wörter)
+		sentiment_index = xx / x_ohne_stp
 		print("Total Polarity = ", total_polarity)
 		# sleep(3)
 		print("::::: NRC ::::")
 		lxlw = [i.lower() for i in lx]
-		efaktor, zorn, erwart, ekel, furcht, freude, trauer, überr, vertrauen = nrc.NRC_analysis(lxlw)
+		emotionsindex, my_faktor, zorn, erwart, ekel, furcht, freude, trauer, überr, vertrauen = nrc.NRC_analysis(lxlw)
 		cwords = len(x)
 		czorn = len(zorn)
 		cewar = len(erwart)
@@ -66,7 +77,8 @@ for pfad in daten_pfade:
 		'headline': head,
 		'total_words': [cwords],
 		'total_polarity': [total_polarity],
-		'emotion_faktor': [efaktor],
+		'emotions_index': [emotionsindex],
+		'sentiment_index': [sentiment_index]
 		'zorn_count': [czorn],
 		'erwartung_count': [cewar],
 		'ekel_count': [cekel],
