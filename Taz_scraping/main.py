@@ -16,11 +16,12 @@ os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/processed_out")
 
 dp = list(set(DW.get_all_paths(os.getcwd())))
 daten_pfade = []
-for i in alle: 
+for i in dp: 
     print(i[60:70])
-    if i[60:70] not in daten_pfade: 
+    if i[60:80] not in daten_pfade: 
         daten_pfade.append(i) 
-len("DIE ANZAHL DER LINKS IST: ", daten_pfade)
+print("DIE ANZAHL DER LINKS IST: ", len(daten_pfade))
+sleep(5)
 nlp = spacy.load('de')
 sentiws = spaCySentiWS(sentiws_path='/media/pi/datadrive/databank/TAZ-SCRAPING/RaspDTF/SentiWS_v2.0')
 nlp.add_pipe(sentiws)
@@ -78,7 +79,7 @@ for pfad in daten_pfade:
 		'total_words': [cwords],
 		'total_polarity': [total_polarity],
 		'emotions_index': [emotionsindex],
-		'sentiment_index': [sentiment_index]
+		'sentiment_index': [sentiment_index],
 		'zorn_count': [czorn],
 		'erwartung_count': [cewar],
 		'ekel_count': [cekel],
