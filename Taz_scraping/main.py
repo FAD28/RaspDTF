@@ -12,12 +12,11 @@ from txtanalysis import DataWrangling as DW
 from txtanalysis.emotion import Emotionen_nrc as nrc 
 from HanTa import HanoverTagger as ht
 
-os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/processed_out")
+os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/processed_out/unique_files")
 
 dp = list(set(DW.get_all_paths(os.getcwd())))
 daten_pfade = list(set(dp)) 
 print("DIE ANZAHL DER LINKS IST: ", len(daten_pfade))
-sleep(5)
 nlp = spacy.load('de')
 sentiws = spaCySentiWS(sentiws_path='/media/pi/datadrive/databank/TAZ-SCRAPING/RaspDTF/SentiWS_v2.0')
 nlp.add_pipe(sentiws)
@@ -35,7 +34,6 @@ for pfad in daten_pfade:
 		df = pd.read_csv(pfad, sep = ";")
 		x = [i.split() for i in list(df['article'])][0]
 		print("ANZAHl an Wörtern im Artikel:", len(x))
-		# sleep(3)
 		head = [i for i in df['headline']]
 		print(str(head))
 		print("::::: SENTIWS ::::")
@@ -57,7 +55,6 @@ for pfad in daten_pfade:
 		x_ohne_stp = DW.remove_stopwords(x, stp_wörter)
 		sentiment_index = xx / x_ohne_stp
 		print("Total Polarity = ", total_polarity)
-		# sleep(3)
 		print("::::: NRC ::::")
 		lxlw = [i.lower() for i in lx]
 		emotionsindex, my_faktor, zorn, erwart, ekel, furcht, freude, trauer, überr, vertrauen = nrc.NRC_analysis(lxlw)
@@ -98,10 +95,10 @@ for pfad in daten_pfade:
 		pd.set_option('display.max_rows', 500)
 		pd.set_option('display.max_columns', 500)
 		pd.set_option('display.width', 1000)
-		# sleep(2)
 		final_df = pd.concat([final_df, newdf], axis = 0, ignore_index= True).reset_index(drop=True)
-	except:
-		print("Error:", i)
+	except Exception as e:
+		print("Error: ", e)
+		sleep(2)
 		continue
 	cxl += 1
 os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/")
