@@ -26,10 +26,9 @@ for i in dp:
 		print(i)
 		headline = list(df['headline'])
 		print(headline)
-		#sleep(3)
 		versionsname = DC.clean_filename([headline][0])
 		print(cc)
-		df.to_csv(f"{versionsname}-{cc}.csv")
+		df.to_csv(f"{versionsname}.csv")
 		cc += 1
 	except Exception as e:
 		print("ERROR: ",e)
