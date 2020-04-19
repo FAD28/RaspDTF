@@ -18,7 +18,7 @@ dp = list(set(DW.get_all_paths(os.getcwd())))
 print(dp)
 #sleep(10)
 cc = 1 
-os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/processed_out/test")
+os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/processed_out/unique_files")
 for i in dp:
 	try:
 		df = pd.read_csv(i, delimiter=";")
@@ -28,7 +28,7 @@ for i in dp:
 		print(headline)
 		versionsname = DC.clean_filename([headline][0])
 		print(cc)
-		df.to_csv(f"{versionsname}.csv")
+		df.to_csv(f"{versionsname}.csv", sep=";")
 		cc += 1
 	except Exception as e:
 		print("ERROR: ",e)

@@ -27,79 +27,77 @@ nlp.add_pipe(sentiws)
 cxl = 1
 final_df = pd.DataFrame()
 total_paths = len(daten_pfade)
-#sleep(500)
 for pfad in daten_pfade:
 	print(f"LINK:{pfad}	*--------*   {cxl} / {total_paths}   ")
-	try:
-		df = pd.read_csv(pfad, sep = ";")
-		x = [i.split() for i in list(df['article'])][0]
-		print("ANZAHl an Wörtern im Artikel:", len(x))
-		head = [i for i in df['headline']]
-		print(str(head))
-		print("::::: SENTIWS ::::")
-		tagger = ht.HanoverTagger("morphmodel_ger.pgz")
-		lx = [tagger.analyze(i)[0] for i in x]
-		polarity_scores = []
-		found_words = []
-		xx = 0
-		for i in tqdm(lx): 
-			doc = nlp(i)
-			for t in doc: 
-				if t._.sentiws != None:
-					tupi = (t.text,t._.sentiws)
-					polarity_scores.append(tupi)
-					found_words.append(t.text)
-					xx += 1
-		total_polarity = round(sum(n for _, n in polarity_scores)/len(found_words),4)
-		stp_wörter = DW.load_stopwords()
-		x_ohne_stp = DW.remove_stopwords(x, stp_wörter)
-		sentiment_index = xx / x_ohne_stp
-		print("Total Polarity = ", total_polarity)
-		print("::::: NRC ::::")
-		lxlw = [i.lower() for i in lx]
-		emotionsindex, my_faktor, zorn, erwart, ekel, furcht, freude, trauer, überr, vertrauen = nrc.NRC_analysis(lxlw)
-		cwords = len(x)
-		czorn = len(zorn)
-		cewar = len(erwart)
-		cekel = len(ekel)
-		cfurc = len(furcht)
-		cfreu = len(freude)
-		ctrau = len(trauer)
-		cüber = len(überr)
-		cvert = len(vertrauen)
-		complete_data = {
-		'headline': head,
-		'total_words': [cwords],
-		'total_polarity': [total_polarity],
-		'emotions_index': [emotionsindex],
-		'sentiment_index': [sentiment_index],
-		'zorn_count': [czorn],
-		'erwartung_count': [cewar],
-		'ekel_count': [cekel],
-		'furcht_count': [cfurc],
-		'freude_count': [cfreu],
-		'trauer_count': [ctrau],
-		'überraschung_count': [cüber],
-		'vertrauen_count': [cvert],
-		'zorn_words': [zorn],
-		'erwartung_words': [erwart],
-		'ekel_words': [ekel],
-		'furcht_words': [furcht],
-		'freude_words': [freude],
-		'trauer_words': [trauer],
-		'überraschung_words': [überr],
-		'vertrauen_words': [vertrauen],
-		'polarity_scores': [polarity_scores]
-		}
-		newdf = pd.DataFrame(complete_data, columns = complete_data.keys())
-		pd.set_option('display.max_rows', 500)
-		pd.set_option('display.max_columns', 500)
-		pd.set_option('display.width', 1000)
-		final_df = pd.concat([final_df, newdf], axis = 0, ignore_index= True).reset_index(drop=True)
-	except Exception as e:
-		print("Error: ", e)
-		sleep(2)
-		continue
+	df = pd.read_csv(pfad, sep = ";")
+	print(df)
+	x = [i.split() for i in list(df['article'])][0]
+	print("ANZAHl an Wörtern im Artikel:", len(x))
+	head = [i for i in df['headline']]
+	print(str(head))
+	print("::::: SENTIWS ::::")
+	tagger = ht.HanoverTagger("morphmodel_ger.pgz")
+	lx = [tagger.analyze(i)[0] for i in x]
+	polarity_scores = []
+	found_words = []
+	xx = 0
+	for i in tqdm(lx): 
+		doc = nlp(i)
+		for t in doc: 
+			if t._.sentiws != None:
+				tupi = (t.text,t._.sentiws)
+				polarity_scores.append(tupi)
+				found_words.append(t.text)
+				xx += 1
+	total_polarity = round(sum(n for _, n in polarity_scores)/len(found_words),4)
+	stp_wörter = DW.load_stopwords()
+	x_ohne_stp = DW.remove_stopwords(x, stp_wörter)
+	sentiment_index = xx / x_ohne_stp
+	print("Total Polarity = ", total_polarity)
+	print("::::: NRC ::::")
+	lxlw = [i.lower() for i in lx]
+	emotionsindex, my_faktor, zorn, erwart, ekel, furcht, freude, trauer, überr, vertrauen = nrc.NRC_analysis(lxlw)
+	cwords = len(x)
+	czorn = len(zorn)
+	cewar = len(erwart)
+	cekel = len(ekel)
+	cfurc = len(furcht)
+	cfreu = len(freude)
+	ctrau = len(trauer)
+	cüber = len(überr)
+	cvert = len(vertrauen)
+	complete_data = {
+	'headline': head,
+	'total_words': [cwords],
+	'total_polarity': [total_polarity],
+	'emotions_index': [emotionsindex],
+	'sentiment_index': [sentiment_index],
+	'zorn_count': [czorn],
+	'erwartung_count': [cewar],
+	'ekel_count': [cekel],
+	'furcht_count': [cfurc],
+	'freude_count': [cfreu],
+	'trauer_count': [ctrau],
+	'überraschung_count': [cüber],
+	'vertrauen_count': [cvert],
+	'zorn_words': [zorn],
+	'erwartung_words': [erwart],
+	'ekel_words': [ekel],
+	'furcht_words': [furcht],
+	'freude_words': [freude],
+	'trauer_words': [trauer],
+	'überraschung_words': [überr],
+	'vertrauen_words': [vertrauen],
+	'polarity_scores': [polarity_scores]
+	}
+	newdf = pd.DataFrame(complete_data, columns = complete_data.keys())
+	pd.set_option('display.max_rows', 500)
+	pd.set_option('display.max_columns', 500)
+	pd.set_option('display.width', 1000)
+	final_df = pd.concat([final_df, newdf], axis = 0, ignore_index= True).reset_index(drop=True)
+	print("Error: ", e)
+	sleep(2)
+	continue
 	cxl += 1
 os.chdir("/media/pi/datadrive/databank/TAZ-SCRAPING/")
 final_df.to_csv('TAZ_results.csv', sep=";")
