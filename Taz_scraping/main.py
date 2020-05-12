@@ -40,8 +40,9 @@ for pfad in daten_pfade:
 	try:
 		print(f"LINK:{pfad}	*--------*   {cxl} / {total_paths}   ")
 		df = pd.read_csv(pfad, sep = ";")
-		print(df)
-		x = [i.split() for i in list(df['article'])][0]
+		artx = list(df['article'])
+		xcl = DC.clean_list(artx)
+		x = [i.split() for i in xcl][0]
 		xart = " ".join(x)
 		print("ANZAHl an Wörtern im Artikel:", len(x))
 		head = [i for i in df['headline']]
