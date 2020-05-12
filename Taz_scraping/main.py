@@ -42,7 +42,9 @@ for pfad in daten_pfade:
 		df = pd.read_csv(pfad, sep = ";")
 		artx = list(df['article'])
 		xcl = DC.clean_list(artx)
-		x = [i.split() for i in xcl][0]
+		xbb = [i.split("-") for i in xcl][0] # add: 12-05  Split bei bindestrich um daraus zwei wörter zu machen
+		xlb = [i.split() for i in xbb] 
+		x = list(itertools.chain.from_iterable(xlb)) # liste in liste zusammenführen
 		xart = " ".join(x)
 		print("ANZAHl an Wörtern im Artikel:", len(x))
 		head = [i for i in df['headline']]
