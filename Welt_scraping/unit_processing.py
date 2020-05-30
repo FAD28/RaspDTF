@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup as bs
 import time, os
 import pandas as pd
 from txtanalysis import DataCleaner as DC
+from txtanalysis import DataWrangling as DW
 import datetime, csv
 import pandas as pd 
 from time import sleep
@@ -18,31 +19,33 @@ now = datetime.datetime.now()
 print(now)
 datum = now.strftime('%d-%m-%Y')
 
-def pre_processing(version):
-	os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
-	file = open(version, encoding='utf8')
-	data = [i.split() for i in file]
-	# ARTIKEL KOMMAS ENTFERNEN
-	t = " ".join(data[3])
-	i = t.replace(",","")
-	data_article = [i.replace('"',"")]
-	# SUMMARY
-	data_summary = [" ".join(data[2])]
-	# TIME
-	data_time = [" ".join(data[1])]
-	# HEADLINE
-	head = " ".join(data[0])
-	hh = head.replace('"','')
-	data_head = [hh.replace(",","")]
-	#column_names = ['headline', 'time', 'summary', 'article']
-	df = pd.DataFrame({'headline':data_head, 'time':data_time, 'summary':data_summary,'article':data_article})
-	df.to_csv(version)
-	print(f"File: {version} was successfully created * * *")
+def pre_processing():
+    os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
+    paths = DW.get_all_paths(os.getcwd())
+    for version in paths:
+        file = open(version, encoding='utf8')
+        data = [i.split() for i in file]
+        # ARTIKEL KOMMAS ENTFERNEN
+        t = " ".join(data[3])
+        i = t.replace(",","")
+        data_article = [i.replace('"',"")]
+        # SUMMARY
+        data_summary = [" ".join(data[2])]
+        # TIME
+        data_time = [" ".join(data[1])]
+        # HEADLINE
+        head = " ".join(data[0])
+        hh = head.replace('"','')
+        data_head = [hh.replace(",","")]
+        #column_names = ['headline', 'time', 'summary', 'article']
+        df = pd.DataFrame({'headline':data_head, 'time':data_time, 'summary':data_summary,'article':data_article})
+        df.to_csv(version)
+        print(f"File: {version} was successfully created * * *")
 
 ########################################################################################################################################################################## EXECUTE
 
 while True:
-    print("DAY NUMBER: ", y, "/", max_days)
+    #print("DAY NUMBER: ", y, "/", max_days)
     now = datetime.datetime.now()
     print(now)
     datum = now.strftime('%d-%m-%Y')
@@ -52,14 +55,10 @@ while True:
     ini = datum
     max_loop = 100
     while x < max_loop: 
-        v_num = str(x)
-        var_datum = ini + "-"
-        version = var_datum + v_num +'-welt_data' + '.csv'
-        print(version)
-        try:
-                pre_processing(version)
-        except:
-                print("No more Files available.")
+        # try:
+        pre_processing()
+        # except:
+        #         print("No more Files available.")
         time.sleep(1)
         x += 1
     y += 1
