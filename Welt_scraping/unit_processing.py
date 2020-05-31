@@ -169,7 +169,8 @@ while True:
         name = headline[0]
         try:
             name2 = name.split()
-            nn = run.clean_name(name2)
+            name3 = run.clean_name(name2)
+            nn = DC.clean_filename([name3])
             new_version_number = number + "-" + nn + '-' + datum + ".csv"
         except:
             new_version_number = number + "-" + 'NAN' + datum + ".csv"
