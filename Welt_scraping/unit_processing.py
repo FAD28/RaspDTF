@@ -141,8 +141,8 @@ while True:
     print("START: * _ * ", datum)
     # for i in range(max_loop):
     # max_loop = int(5000) 
-    # number = str(c)
-    # c = 1
+    c = 1
+    number = str(c)
     lo = 1
     ll = str(lo)
     v_list = []
@@ -153,13 +153,12 @@ while True:
         print("VERSIONS NUMMER:  ",version)
         print("___________________________________")
         # try:
-        df = pd.read_csv(version, delimiter=";")
+        df = pd.read_csv(version)
         # except Exception as e:
         #     print("FINISHED OR ERROR BY READING  -->:  ", e)
         #     sleep(10)
         #     continue
         print(df)
-        sleep(10)
         article = df['article']
         time = list(df['time'])
         summary = list(df['summary'])
