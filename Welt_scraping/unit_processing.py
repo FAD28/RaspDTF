@@ -44,23 +44,22 @@ def pre_processing():
 
 ########################################################################################################################################################################## EXECUTE
 
-while True:
-    now = datetime.datetime.now()
-    print(now)
-    datum = now.strftime('%d-%m-%Y')
-    print("_______________________")
-    time.sleep(4)
-    x = 1
-    ini = datum
-    max_loop = 100
-    while x < max_loop: 
-        try:
-            pre_processing()
-        except Exception as e:
-            print("No more Files available. ERROR with: ", e)
-            time.sleep(5)
-        time.sleep(1)
-        x += 1
+
+now = datetime.datetime.now()
+print(now)
+datum = now.strftime('%d-%m-%Y')
+print("_______________________")
+# time.sleep(4)
+x = 1
+ini = datum
+for i in range(1): 
+    try:
+        pre_processing()
+    except Exception as e:
+        print("No more Files available. ERROR with: ", e)
+        # time.sleep(5)
+    # time.sleep(1)
+    x += 1
     print(" ")
     print(" .*.*. ")
     print(" ")
