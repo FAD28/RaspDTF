@@ -137,7 +137,7 @@ master = 1
 
 while True:
     now = datetime.datetime.now()
-    datum = now.strftime('%d-%m-%Y, %H:%M Uhr')
+    datum = now.strftime('%d-%m-%Y')
     print("START: * _ * ", datum)
     # for i in range(max_loop):
     # max_loop = int(5000) 
@@ -146,11 +146,12 @@ while True:
     lo = 1
     ll = str(lo)
     v_list = []
+    count_files = len(paths)
     os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
     paths = DW.get_all_paths(os.getcwd())
     for version in paths:   
         # version = f'{datum}-{number}-welt_data.csv'
-        print("VERSIONS NUMMER:  ",version)
+        print("VERSIONS NUMMER:  ",version, "1 / ", count_files)
         print("___________________________________")
         # try:
         df = pd.read_csv(version)
