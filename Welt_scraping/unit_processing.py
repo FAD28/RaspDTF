@@ -26,12 +26,18 @@ def pre_processing():
         file = open(version, encoding='utf8')
         data = [i.split() for i in file]
         # ARTIKEL KOMMAS ENTFERNEN
-        t = " ".join(data[3])
+        try:
+            t = " ".join(data[3])
+        except:
+            t = "NaN"
         i = t.replace(",","")
         data_article = [i.replace('"',"")]
         # SUMMARY
-        data_summary = [" ".join(data[2])]
-        # TIME
+        try:
+            data_summary = [" ".join(data[2])]
+        except:
+            data_summary = "NaN"
+	# TIME
         data_time = [" ".join(data[1])]
         # HEADLINE
         head = " ".join(data[0])
@@ -53,11 +59,7 @@ print("_______________________")
 x = 1
 ini = datum
 for i in range(1): 
-    try:
-        pre_processing()
-    except Exception as e:
-        print("No more Files available. ERROR with: ", e)
-        # time.sleep(5)
+    pre_processing()
     # time.sleep(1)
     x += 1
     print(" ")
@@ -151,10 +153,10 @@ while True:
     count_files = len(paths)
     for version in paths:   
         # version = f'{datum}-{number}-welt_data.csv'
-        print("VERSIONS NUMMER:  ",version, "1 / ", count_files)
+        print("VERSIONS NUMMER:  ",version, lo,"/ ", count_files)
         print("___________________________________")
         # try:
-        df = pd.read_csv(version)
+        df = pd.read_csv(version, sep = ',|;')
         # except Exception as e:
         #     print("FINISHED OR ERROR BY READING  -->:  ", e)
         #     sleep(10)
@@ -172,7 +174,7 @@ while True:
             name2 = name.split()
             name3 = run.clean_name(name2)
             nn = DC.clean_filename([name3])
-            new_version_number = number + "-" + nn + '-' + datum + ".csv"
+            new_version_number =  nn + '-' + datum + ".csv"
         except:
             new_version_number = number + "-" + 'NAN' + datum + ".csv"
         v_list.append(new_version_number)
@@ -189,7 +191,7 @@ while True:
 
         sleep(1)
         c += 1
-
+        lo += 1
         print("___________________________________")
     print("SUCCESS DATA CONVERTED * * *")
     f = open(f'{ll}-versionsnamen_liste-{datum}.txt', 'w')
