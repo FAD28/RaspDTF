@@ -58,7 +58,8 @@ print("_______________________")
 # time.sleep(4)
 x = 1
 ini = datum
-for i in range(1): 
+#for i in range(1): 
+if x > 2: 
     pre_processing()
     # time.sleep(1)
     x += 1
@@ -153,15 +154,16 @@ while True:
     count_files = len(paths)
     for version in paths:   
         # version = f'{datum}-{number}-welt_data.csv'
-        print("VERSIONS NUMMER:  ",version, lo,"/ ", count_files)
+        print("VERSIONS NUMMER:  ",version, c,"/ ", count_files)
         print("___________________________________")
         # try:
-        df = pd.read_csv(version, sep = ',|;')
+        df = pd.read_csv(version, sep = ';', header=0)
         # except Exception as e:
         #     print("FINISHED OR ERROR BY READING  -->:  ", e)
         #     sleep(10)
         #     continue
         print(df)
+        sleep(10)
         article = df['article']
         time = list(df['time'])
         summary = list(df['summary'])
@@ -180,20 +182,17 @@ while True:
         v_list.append(new_version_number)
         try:  # TRY: Weil bei Artikeln ohne Inhalt sonst ein Fehler kommt
             data = [i.split(".") for i in article][0]
-        except Exception as e:
+        except:
             print(f" - - - VERSION: {version}   hat einen Fehler. Möglicherweiße kein Inhalt?!")
             c += 1
-            print("Fehlermeldung: ", e)
-            sleep(5)
             continue
         # EXCECUTE
         output, link_liste = run.article_clean(data, headline, time, summary, article, new_version_number)
 
         sleep(1)
         c += 1
-        lo += 1
         print("___________________________________")
-    print("SUCCESS DATA CONVERTED * * *")
+    print(f"SUCCESS DATA CONVERTED * * *{c} Errors found ")
     f = open(f'{ll}-versionsnamen_liste-{datum}.txt', 'w')
     f.write(str(v_list))
     y += 1
