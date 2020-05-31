@@ -146,9 +146,9 @@ while True:
     lo = 1
     ll = str(lo)
     v_list = []
-    count_files = len(paths)
     os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
     paths = DW.get_all_paths(os.getcwd())
+    count_files = len(paths)
     for version in paths:   
         # version = f'{datum}-{number}-welt_data.csv'
         print("VERSIONS NUMMER:  ",version, "1 / ", count_files)
