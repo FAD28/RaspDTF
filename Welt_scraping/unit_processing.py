@@ -158,6 +158,8 @@ while True:
         #     print("FINISHED OR ERROR BY READING  -->:  ", e)
         #     sleep(10)
         #     continue
+        print(df)
+        sleep(10)
         article = df['article']
         time = list(df['time'])
         summary = list(df['summary'])
