@@ -17,7 +17,7 @@ import requests
 
 now = datetime.datetime.now()
 print(now)
-datum = now.strftime('%d-%m-%Y')
+datum = now.strftime('%d-%m-%Y, %H:%M Uhr')
 
 def pre_processing():
     os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
@@ -39,13 +39,12 @@ def pre_processing():
         data_head = [hh.replace(",","")]
         #column_names = ['headline', 'time', 'summary', 'article']
         df = pd.DataFrame({'headline':data_head, 'time':data_time, 'summary':data_summary,'article':data_article})
-        df.to_csv(version)
+        df.to_csv(version, sep=";")
         print(f"File: {version} was successfully created * * *")
 
 ########################################################################################################################################################################## EXECUTE
 
 while True:
-    #print("DAY NUMBER: ", y, "/", max_days)
     now = datetime.datetime.now()
     print(now)
     datum = now.strftime('%d-%m-%Y')
@@ -55,19 +54,16 @@ while True:
     ini = datum
     max_loop = 100
     while x < max_loop: 
-        # try:
-        pre_processing()
-        # except:
-        #         print("No more Files available.")
+        try:
+            pre_processing()
+        except Exception as e:
+            print("No more Files available. ERROR with: ", e)
+            time.sleep(5)
         time.sleep(1)
         x += 1
-    y += 1
     print(" ")
-    print(" ... ")
+    print(" .*.*. ")
     print(" ")
-    print("Going to Sleep ** --> 24 hours zZZ")
-    #time.sleep(86400)
-
 
 ###############################################################################################
 print("! ! ! ! ! ! SWITCHING TO FUNCTIONS.PY ! ! ! ! ! ! ! ")
@@ -78,7 +74,6 @@ time.sleep(5)
 print("--------------------------------------------------------------------------------------")
 time.sleep(1)
 #############################################################################################
-
 
 class Functions:
     def __init__(self):
@@ -115,7 +110,7 @@ class Functions:
         df= pd.DataFrame({'headline': liste0, 'time': liste1, 'summary': liste2, 'article': liste3})
         print(df)
         print(" ---->   ",version_name)
-        df.to_csv(version_name)
+        df.to_csv(version_name, sep=";")
 
     def clean_name(self, name):
         new_list= []
@@ -142,27 +137,28 @@ master = 1
 ##################################################################################################################################################################### EXECUTE
 
 while True:
-    print("START: *_*  DAY: ", y )
     now = datetime.datetime.now()
-    datum = now.strftime('%d-%m-%Y')
+    datum = now.strftime('%d-%m-%Y, %H:%M Uhr')
     print("START: * _ * ", datum)
-    print("DAY NUMBER: ", y, "/", max_days)
-    max_loop = int(100) 
-    c = 1
+    # for i in range(max_loop):
+    # max_loop = int(5000) 
+    # number = str(c)
+    # c = 1
     lo = 1
     ll = str(lo)
     v_list = []
-    for i in range(max_loop):
-        os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
-        number = str(c)
-        version = f'{datum}-{number}-welt_data.csv'
+    os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
+    paths = DW.get_all_paths(os.getcwd())
+    for version in paths:   
+        # version = f'{datum}-{number}-welt_data.csv'
         print("VERSIONS NUMMER:  ",version)
         print("___________________________________")
-        try:
-            df = pd.read_csv(version)
-        except:
-            print("FINISHED OR ERROR BY READING")
-            continue
+        # try:
+        df = pd.read_csv(version, delimiter=";")
+        # except Exception as e:
+        #     print("FINISHED OR ERROR BY READING  -->:  ", e)
+        #     sleep(10)
+        #     continue
         article = df['article']
         time = list(df['time'])
         summary = list(df['summary'])
@@ -180,9 +176,11 @@ while True:
         v_list.append(new_version_number)
         try:  # TRY: Weil bei Artikeln ohne Inhalt sonst ein Fehler kommt
             data = [i.split(".") for i in article][0]
-        except:
-            print(" - - - VERSION: {version}   hat einen Fehler. Möglicherweiße kein Inhalt?!")
+        except Exception as e:
+            print(f" - - - VERSION: {version}   hat einen Fehler. Möglicherweiße kein Inhalt?!")
             c += 1
+            print("Fehlermeldung: ", e)
+            sleep(5)
             continue
         # EXCECUTE
         output, link_liste = run.article_clean(data, headline, time, summary, article, new_version_number)
