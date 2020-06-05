@@ -23,6 +23,7 @@ def pre_processing():
     os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
     paths = DW.get_all_paths(os.getcwd())
     for version in paths:
+        print(version)
         file = open(version, encoding='utf8')
         data = [i.split() for i in file]
         # ARTIKEL KOMMAS ENTFERNEN
@@ -45,6 +46,8 @@ def pre_processing():
         data_head = [hh.replace(",","")]
         #column_names = ['headline', 'time', 'summary', 'article']
         df = pd.DataFrame({'headline':data_head, 'time':data_time, 'summary':data_summary,'article':data_article})
+        print(df)
+        time.sleep(2)
         df.to_csv(version, sep=";")
         print(f"File: {version} was successfully created * * *")
 
@@ -59,7 +62,7 @@ print("_______________________")
 x = 1
 ini = datum
 #for i in range(1): 
-if x > 2: 
+if x == 1: 
     pre_processing()
     # time.sleep(1)
     x += 1
