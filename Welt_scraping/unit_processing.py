@@ -55,7 +55,7 @@ print(now)
 datum = now.strftime('%d-%m-%Y')
 print("_______________________")
 # time.sleep(4)
-x = 1
+x = int(input("1 First_processing   <---->    0 Functionspy"))
 ini = datum
 #for i in range(1): 
 if x == 1: 
