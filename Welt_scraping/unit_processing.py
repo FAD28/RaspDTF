@@ -58,7 +58,7 @@ print("_______________________")
 x = 1
 ini = datum
 #for i in range(1): 
-if x = 1: 
+if x == 1: 
     pre_processing()
     # time.sleep(1)
     x += 1
