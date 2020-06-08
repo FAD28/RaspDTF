@@ -19,7 +19,7 @@ print(now)
 datum = now.strftime('%d-%m-%Y, %H:%M Uhr')
 
 def pre_processing():
-    os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
+    os.chdir('/Volumes/datadrive/databank/WELT-SCRAPING/output')
     paths = DW.get_all_paths(os.getcwd())
     for version in paths:
         file = open(version, encoding='utf8')
@@ -78,7 +78,7 @@ time.sleep(1)
 
 class Functions:
     def __init__(self):
-        self.remove_me = '/media/pi/datadrive/databank/WELT-SCRAPING/RaspDTF/Welt_scraping/remove_me_welt.csv'
+        self.remove_me = '/Volumes/datadrive/databank/WELT-SCRAPING/RaspDTF/Welt_scraping/remove_me_welt.csv'
         self.rm = pd.read_csv(self.remove_me, header = None)
         self.rm_list = list(self.rm[0])
         self.output = []
@@ -86,7 +86,7 @@ class Functions:
         self.article_names = []
 
     def article_clean(self, data, headline, time, summary, article, new_version_number):    
-        os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
+        os.chdir('/Volumes/datadrive/databank/WELT-SCRAPING/output')
         for i in data: 
             ii = i.strip()
             if ii not in self.rm_list:
@@ -101,14 +101,17 @@ class Functions:
                     continue
                 self.output.append(ii)
 
-        self.new_data(headline, time, summary, article, new_version_number)
+        filename = os.path.basename(version)
+
+
+        self.new_data(headline, time, summary, article, new_version_number, filename)
 
         return self.output, self.link_liste
 
-    def new_data(self, liste0, liste1, liste2, liste3, version_name):
+    def new_data(self, liste0, liste1, liste2, liste3, version_name, datum):
         # PATH TO OUTPUT
-        os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/processing_out')
-        df= pd.DataFrame({'headline': liste0, 'time': liste1, 'summary': liste2, 'article': liste3})
+        os.chdir('/Volumes/datadrive/databank/WELT-SCRAPING/processing_out')
+        df= pd.DataFrame({'headline': liste0, 'time': liste1, 'summary': liste2, 'article': liste3, 'filename': datum})
         print(df)
         print(" ---->   ",version_name)
         df.to_csv(version_name, sep=";")
@@ -148,7 +151,7 @@ while True:
     lo = 1
     ll = str(lo)
     v_list = []
-    os.chdir('/media/pi/datadrive/databank/WELT-SCRAPING/output')
+    os.chdir('/Volumes/datadrive/databank/WELT-SCRAPING/output')
     paths = DW.get_all_paths(os.getcwd())
     count_files = len(paths)
     for version in paths:   
@@ -162,12 +165,14 @@ while True:
         #     sleep(10)
         #     continue
         print(df)
-        sleep(10)
+        # sleep(10)
         article = df['article']
         time = list(df['time'])
         summary = list(df['summary'])
         hd = df['headline']
         headline = [i for i in hd]
+        filename = os.path.basename(version)
+
 
         # New Article Name:
         name = headline[0]
